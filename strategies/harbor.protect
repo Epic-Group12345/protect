@@ -1,0 +1,28 @@
+{
+    "name": "Harbor Detection",
+    "type": "system",
+    "checks": [
+        {
+            "type": "file_existence",
+            "path": "/",
+            "patterns": ["harbor.sh", "gotty", "proot"],
+            "message": "Harbor component detected: {filename}"
+        },
+        {
+            "type": "file_content",
+            "path": "harbor.sh",
+            "patterns": [
+                "Alpine Linux Installation",
+                "ALPINE_VERSION",
+                "proot-me"
+            ],
+            "message": "Harbor script signature found: {pattern}"
+        },
+        {
+            "type": "process_check",
+            "command": "ps aux",
+            "patterns": ["proot", "gotty", "alpine"],
+            "message": "Harbor-related process detected: {processes}"
+        }
+    ]
+}

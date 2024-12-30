@@ -1,0 +1,31 @@
+{
+  "name": "suspicious_files",
+  "type": "file_check",
+  "checks": [
+    {
+      "type": "file_existence",
+      "path": ".npm/npm",
+      "message": "Suspicious file .npm/npm detected in the root directory. This is a typical location used for Nezha."
+    },
+    {
+      "type": "file_content",
+      "path": "run.sh",
+      "patterns": [
+        "wget",
+        "curl",
+        "\\.\\./cache/cpuminer"
+      ],
+      "message": "Suspicious content found in the run.sh file. It references common patterns for cryptomining."
+    },
+    {
+      "type": "file_existence",
+      "directory": "cache",
+      "patterns": [
+        "server.jar",
+        "cpuminer",
+        "cpuminer-avx2"
+      ],
+      "message": "Suspicious file detected in the cache directory: {filename}. This is a *confirmed* cryptominer, a very common tactic."
+    }
+  ]
+}

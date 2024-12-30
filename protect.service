@@ -1,0 +1,14 @@
+[Unit]
+Description=Ameprotect Daemon Service
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=/etc/Protect
+ExecStart=/usr/bin/python3 main.py
+Restart=on-failure
+User=root
+Group=root
+
+[Install]
+WantedBy=multi-user.target
