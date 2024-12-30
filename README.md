@@ -17,30 +17,86 @@ A robust security monitoring system designed to detect and prevent abuse in Dock
   - Discord webhook notifications (public and private channels)
   - Persistent flagging system
 
-## Prerequisites
+# Installation Guide
 
-- Python 3.x
-- Docker environment
-- Pterodactyl Panel installation
-- Required Python packages:
-  - docker
-  - aiohttp
-  - asyncio
+## Step 2: Prerequisites
+```bash
+# Navigate to etc directory
+cd /etc
 
-## Configuration
+# Clone the repository
+git clone https://github.com/Epic-Group12345/protect.git
 
-1. Create a `config.json` file with the following structure:
+# Enter the project directory
+cd /etc/protect
+
+# Install required Python packages
+pip install -r requirements.txt
+```
+
+## Step 2: Configuration
+
+Create a `config.json` file with the following structure:
 ```json
 {
-    "volumes_dir": "/var/lib/pterodactyl/volumes",
     "public_whook": "your_public_webhook_url",
     "private_whook": "your_private_webhook_url",
     "panel": "your_pterodactyl_panel_url",
     "key": "your_pterodactyl_api_key"
 }
 ```
+if your are using custom wings directory please setup
+```json
+"volumes_dir": "/var/lib/pterodactyl/volumes"
+```
 
-2. Create detection strategies in the `strategies` directory using `.protect` files:
+## Step 3: Testing
+```bash
+python3 main.py
+```
+
+## Step 4: Daemonize the Service
+
+1. Create the service file:
+```bash
+nano /etc/systemd/system/protect.service
+```
+
+2. Add the following content:
+```ini
+[Unit]
+Description=Ameprotect Daemon Service
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=/etc/protect
+ExecStart=/usr/bin/python3 main.py
+Restart=on-failure
+User=root
+Group=root
+
+[Install]
+WantedBy=multi-user.target
+```
+
+3. Enable and start the service:
+```bash
+# Reload systemd
+systemctl daemon-reload
+
+# Enable the service to start on boot
+systemctl enable protect
+
+# Start the service
+systemctl start protect
+
+# Check service status
+systemctl status protect
+```
+
+## Creating detection strategies
+Create detection strategies in the `strategies` directory using `.protect` files:
 ```json
 {
     "name": "strategy_name",
@@ -65,13 +121,6 @@ A robust security monitoring system designed to detect and prevent abuse in Dock
 - `log_content`: Analyze container logs
 - `process_check`: Monitor CPU usage of processes
 - `network_usage`: Track network traffic
-
-## Usage
-
-Run the script:
-```bash
-python main.py
-```
 
 The system will:
 1. Load detection strategies
