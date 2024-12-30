@@ -45,7 +45,7 @@ Create a `config.json` file with the following structure:
     "key": "your_pterodactyl_api_key"
 }
 ```
-if your are using custom wings directory please setup
+if your are using custom wings volumes directory please setup
 ```json
 "volumes_dir": "/var/lib/pterodactyl/volumes"
 ```
