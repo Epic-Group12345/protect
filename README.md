@@ -19,7 +19,7 @@ A robust security monitoring system designed to detect and prevent abuse in Dock
 
 # Installation Guide
 
-## Step 2: Prerequisites
+## Step 1: Prerequisites
 ```bash
 # Navigate to etc directory
 cd /etc
