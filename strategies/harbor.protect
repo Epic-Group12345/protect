@@ -17,12 +17,6 @@
                 "proot-me"
             ],
             "message": "Harbor script signature found: {pattern}"
-        },
-        {
-            "type": "process_check",
-            "command": "ps aux",
-            "patterns": ["proot", "gotty", "alpine"],
-            "message": "Harbor-related process detected: {processes}"
         }
     ]
 }
