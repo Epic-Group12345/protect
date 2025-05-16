@@ -30,6 +30,10 @@ git clone https://github.com/Epic-Group12345/protect.git
 # Enter the project directory
 cd /etc/protect
 
+# Create venv
+python3 -m venv venv
+source venv/bin/activate
+
 # Install required Python packages
 pip install -r requirements.txt
 ```
