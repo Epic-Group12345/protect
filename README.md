@@ -69,7 +69,7 @@ nano /etc/systemd/system/protect.service
 2. Add the following content:
 ```ini
 [Unit]
-Description=Ameprotect Daemon Service
+Description=Protect Daemon Service
 After=network.target
 
 [Service]
