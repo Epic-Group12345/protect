@@ -75,7 +75,8 @@ After=network.target
 [Service]
 Type=simple
 WorkingDirectory=/etc/protect
-ExecStart=/usr/bin/python3 main.py
+Environment="PATH=/etc/protect/venv/bin:$PATH"
+ExecStart=/etc/protect/venv/bin/python main.py
 Restart=on-failure
 User=root
 Group=root
